@@ -9,6 +9,8 @@ jobs:
             - name: Checkout the branch
               uses: actions/checkout@v4
             - name: install cowsay app using shell script
-              run: ./ascii-script.sh
+              run: | 
+                chmod +x ascii-script.sh
+                ./ascii-script.sh
 
             
