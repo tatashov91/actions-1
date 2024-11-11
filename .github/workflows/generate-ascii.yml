@@ -13,6 +13,7 @@ jobs:
                 chmod +x ascii-script.sh
                 ./ascii-script.sh
     first_job:
+        needs: ascii_job
         runs-on: ubuntu-latest
         steps:
             - name: Checkout the branch
