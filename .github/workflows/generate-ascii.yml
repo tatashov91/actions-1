@@ -6,22 +6,37 @@ jobs:
     ascii_job:
         runs-on: ubuntu-latest
         steps:
+            
             - name: Checkout the branch
               uses: actions/checkout@v4
+            
             - name: install cowsay app using shell script
               run: | 
                 chmod +x ascii-script.sh
                 ./ascii-script.sh
+            
+            - name: Upload a file
+              uses: actions/upload-artifact@v3
+              with:
+                name: dragon-test-file
+                path: dragon.txt
     first_job:
         needs: ascii_job
         runs-on: ubuntu-latest
         steps:
+            - name: Download a file
+              uses: actions/download-artifact@v3
+              with:
+                name: dragon-test-file
+            
             - name: Checkout the branch
               uses: actions/checkout@v4
+            
             - name: Welcome message
               run: | 
                 echo "My first app"
                 ls -lrt
                 cat README.md
-            - name: Generate ASCII
-              run: cowsay -f dragon "Run for cover, I am a dragon" >> dragon.txt
+            
+            - name: open a file
+              run: cat dragon.txt
